@@ -1,0 +1,4 @@
+node_modules
+Images
+# Keep environment variables out of version control
+

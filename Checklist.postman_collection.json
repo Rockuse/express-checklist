@@ -1,0 +1,438 @@
+{
+	"info": {
+		"_postman_id": "2d4a09c0-feb7-421d-a32c-5bf3224f6ef0",
+		"name": "Checklist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5764721"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\":\"{{username}}\",\r\n\"password\":\"{{password}}\",\r\n\"email\":\"{{email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson= pm.response.json()\r",
+							"console.log(responseJson.token)\r",
+							"pm.environment.set('token', responseJson.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\":\"{{username}}\",\r\n\"password\":\"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson= pm.response.json()\r",
+							"console.log(responseJson.data.id)\r",
+							"pm.environment.set('id', responseJson.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"tes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/checklist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/checklist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Checklist Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson= pm.response.json()\r",
+							"console.log(responseJson.data.id)\r",
+							"pm.environment.set('item', responseJson.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"itemName\":\"Fahmi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/checklist/{{id}}/item",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist",
+						"{{id}}",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Checklist Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/checklist/{{id}}/item",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist",
+						"{{id}}",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "set status Checklist Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/checklist/{{id}}/item/{{item}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist",
+						"{{id}}",
+						"item",
+						"{{item}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rename Checklist Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"itemName\":\"muzakki\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/checklist/{{id}}/item/rename/{{item}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist",
+						"{{id}}",
+						"item",
+						"rename",
+						"{{item}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Checklist Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/checklist/{{id}}/item/{{item}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist",
+						"{{id}}",
+						"item",
+						"{{item}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/checklist/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checklist",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
